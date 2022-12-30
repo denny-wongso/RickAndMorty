@@ -11,6 +11,7 @@ import Foundation
 protocol CharacterApi {
     func getCharacters(success: ((CharacterResponse?) -> Void)?, fail: ((HTTPError) -> Void)?)
     func getNextCharacters(nextURL: String, success: ((CharacterResponse?) -> Void)?, fail: ((HTTPError) -> Void)?)
+    func getImage(with path: String, success: ((Data?) -> Void)?, fail: ((HTTPError) -> Void)?)
 }
 
 public class CharacterService: CharacterApi {
@@ -27,7 +28,6 @@ public class CharacterService: CharacterApi {
             fail?(.urlFailed)
                 return
               }
-        
         request.request(url: url, handler: {[success, fail] (data, response, error) in
             guard error == nil, let data = data else {
                 fail?(.noData)
@@ -46,8 +46,8 @@ public class CharacterService: CharacterApi {
     func getNextCharacters(nextURL: String, success: ((CharacterResponse?) -> Void)?, fail: ((HTTPError) -> Void)?) {
         guard let urlComponents = URLComponents(string: nextURL), let url = urlComponents.url else {
             fail?(.urlFailed)
-                return
-              }
+            return
+          }
         
         request.request(url: url, handler: {[success, fail] (data, response, error) in
             guard error == nil, let data = data else {
@@ -61,6 +61,20 @@ public class CharacterService: CharacterApi {
             } else {
                 fail?(.parsingFailed)
             }
+        })
+    }
+    
+    func getImage(with path: String, success: ((Data?) -> Void)?, fail: ((HTTPError) -> Void)?) {
+        guard let url = URL(string: path) else {
+            fail?(.urlFailed)
+            return
+        }
+        request.request(url: url, handler: {[success, fail] (data, response, error) in
+            guard error == nil, let data = data else {
+                fail?(.noData)
+                return
+            }
+            success?(data)
         })
     }
 }
