@@ -19,6 +19,17 @@ public enum Species: String, Codable {
     case Animal = "Animal"
     case Mythological = "Mythological Creature"
     case Human = "Human"
+    case unknown = "unknown"
+    
+    public init(from decoder: Decoder) {
+        let container = try? decoder.singleValueContainer()
+        let rawString = try? container?.decode(String.self)
+        if let text = rawString, let userType = Species(rawValue: text) {
+            self = userType
+        } else {
+            self = .unknown
+        }
+    }
 }
 
 public enum Gender: String, Codable {
