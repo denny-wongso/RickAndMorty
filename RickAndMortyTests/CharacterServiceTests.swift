@@ -1,0 +1,85 @@
+//
+//  CharacterServiceTests.swift
+//  RickAndMortyTests
+//
+//  Created by Denny Wongso on 30/12/22.
+//
+
+import XCTest
+@testable import RickAndMorty
+
+
+class CharacterServiceTests: XCTestCase {
+    func testURLIsCorrect() {
+        let service = CharacterService(request: MockURLSessionRequest(), url: "/character")
+        XCTAssertEqual(service.url, BaseService.BaseURL + "/character")
+    }
+    
+    func testSuccessfullyGetCharacters() {
+        let expectation = expectation(description: "get characters")
+        
+        let info = Info(count: 42, pages: 10, next: "somewhere", prev: nil)
+        let character1 = Character(id: 1, name: "a", status: .Alive, species: .Alien, type: "-", gender: .Genderless, origin: Place(name: "b", url: "somewhereb"), location: Place(name: "b", url: "somewhereb"), image: "s", episode: ["1","2"], url: "", created: "")
+        let character2 = Character(id: 1, name: "a", status: .Alive, species: .Alien, type: "-", gender: .Genderless, origin: Place(name: "b", url: "somewhereb"), location: Place(name: "b", url: "somewhereb"), image: "s", episode: ["1","2"], url: "", created: "")
+        let arr = [character1, character2]
+        let response = CharacterResponse(info: info, results: arr)
+        
+        let session = MockURLSessionRequest(data: response)
+        let service = CharacterService(request: session, url: "/character")
+        service.getCharacter(success: {(response) in
+            XCTAssertEqual(response?.results?.count, arr.count)
+            expectation.fulfill()
+        }, fail: {(error) in
+            XCTFail("Error: \(error)")
+            expectation.fulfill()
+        })
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testNoDataWhenGetCharacters() {
+        let expectation = expectation(description: "get empty character")
+        let session = MockURLSessionRequest()
+        let service = CharacterService(request: session, url: "/character")
+        service.getCharacter(success: {(response) in
+            XCTFail("Error: should not have any character")
+            expectation.fulfill()
+        }, fail: {(error) in
+            XCTAssertEqual(HTTPError.noData, error)
+            expectation.fulfill()
+        })
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail("Error: \(error.localizedDescription)")
+            }
+        }
+
+    }
+    
+    
+}
+
+private class MockURLSessionRequest: URLSessionRequestProtocol {
+    var data: CharacterResponse? = nil
+    init(data: CharacterResponse? = nil) {
+        self.data = data
+    }
+    
+    enum MockError: Error {
+        case noInternet
+    }
+    func request(url: URL, handler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        if data != nil {
+            guard let data = try? JSONEncoder().encode(data) else {
+                handler(nil, nil, MockError.noInternet)
+                return
+            }
+            handler(data, nil, nil)
+            return
+        }
+        handler(nil, nil, MockError.noInternet)
+    }
+}
