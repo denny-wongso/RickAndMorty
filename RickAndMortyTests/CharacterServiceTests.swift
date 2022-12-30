@@ -26,7 +26,7 @@ class CharacterServiceTests: XCTestCase {
         
         let session = MockURLSessionRequest(data: response)
         let service = CharacterService(request: session, url: "/character")
-        service.getCharacter(success: {(response) in
+        service.getCharacters(success: {(response) in
             XCTAssertEqual(response?.results?.count, arr.count)
             expectation.fulfill()
         }, fail: {(error) in
@@ -44,7 +44,7 @@ class CharacterServiceTests: XCTestCase {
         let expectation = expectation(description: "get empty character")
         let session = MockURLSessionRequest()
         let service = CharacterService(request: session, url: "/character")
-        service.getCharacter(success: {(response) in
+        service.getCharacters(success: {(response) in
             XCTFail("Error: should not have any character")
             expectation.fulfill()
         }, fail: {(error) in
