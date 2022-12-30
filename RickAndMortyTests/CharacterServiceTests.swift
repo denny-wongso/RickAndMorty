@@ -87,10 +87,62 @@ class CharacterServiceTests: XCTestCase {
                 XCTFail("Error: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func testGetImageSuccessfully() {
+        let expectation = expectation(description: "get an image")
+        let session = MockURLSessionRequestForImage()
+        let service = CharacterService(request: session, url: "/character")
+        
+        service.getImage(with: "asd.jpg", success: {(response) in
+            XCTAssertNotNil(response)
+            expectation.fulfill()
+        }, fail: {(error) in
+            XCTFail("Error: \(error)")
+            expectation.fulfill()
+        })
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testGetImageFailed() {
+        let expectation = expectation(description: "get an empty image")
+        let session = MockURLSessionRequestForImage()
+        let service = CharacterService(request: session, url: "/character")
+        
+        service.getImage(with: "asd", success: {(response) in
+            XCTFail("Error: should not success")
+            expectation.fulfill()
+        }, fail: {(error) in
+            XCTAssertEqual(HTTPError.noData, error)
+            expectation.fulfill()
+        })
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
 
+private class MockURLSessionRequestForImage: URLSessionRequestProtocol {
+    func request(url: URL, handler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        print(url)
+        if url.pathExtension == "jpg" {
+            handler(Data(), nil, nil)
+        } else {
+            handler(nil, nil, MockError.noInternet)
+        }
     }
     
     
+}
+
+private enum MockError: Error {
+    case noInternet
 }
 
 private class MockURLSessionRequest: URLSessionRequestProtocol {
@@ -100,9 +152,7 @@ private class MockURLSessionRequest: URLSessionRequestProtocol {
         self.data = data
     }
     
-    enum MockError: Error {
-        case noInternet
-    }
+
     func request(url: URL, handler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         self.url = url.path
         if data != nil {
