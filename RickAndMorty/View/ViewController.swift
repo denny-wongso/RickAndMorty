@@ -65,7 +65,6 @@ class ViewController: UIViewController {
     
     private func filterData(name: String, startIndex: Int) {
         self.characterViewModel?.filter(name: name, success: {[weak self](success, message) in
-            print(success)
             if startIndex == 0 {
                 DispatchQueue.main.async {
                     self?.collectionViewCharacters.reloadData()
