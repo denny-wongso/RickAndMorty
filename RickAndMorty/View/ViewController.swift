@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var characterViewModel: CharacterViewModelProtocol?
+    var filterViewController: UIViewController?
     
     @IBOutlet weak var collectionViewCharacters: UICollectionView!
     @IBOutlet weak var textFieldSearch: UITextField!
@@ -34,8 +35,24 @@ class ViewController: UIViewController {
         loadMoreData(initial: true)
     }
     
-    func setup(characterViewModel: CharacterViewModelProtocol) {
+    func setup(characterViewModel: CharacterViewModelProtocol, filterViewController: UIViewController) {
         self.characterViewModel = characterViewModel
+        self.filterViewController = filterViewController
+        let doneButton = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(filterButtonTapped))
+        doneButton.image = UIImage(systemName: "slider.horizontal.3")
+        self.navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc func filterButtonTapped() {
+        guard let vc = filterViewController else {
+            return
+        }
+        vc.modalPresentationStyle = .pageSheet
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+        present(vc, animated: true, completion: nil)
     }
 
     
@@ -133,5 +150,11 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     // 4
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+}
+
+extension ViewController: FilterViewDelegate {
+    func filterSelected(status: String, species: String, gender: String) {
+
     }
 }

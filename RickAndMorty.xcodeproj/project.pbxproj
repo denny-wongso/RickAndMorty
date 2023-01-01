@@ -23,10 +23,13 @@
 		B03F1BB5295EA17E008B77E8 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F1BB4295EA17E008B77E8 /* Common.swift */; };
 		B03F1BB8295EB466008B77E8 /* URLSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F1BB7295EB466008B77E8 /* URLSessionRequest.swift */; };
 		B03F1BBA295EBE6C008B77E8 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F1BB9295EBE6C008B77E8 /* Info.swift */; };
+		B0504A0629616EE200FC203E /* FilterViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0504A0529616EE200FC203E /* FilterViewViewController.swift */; };
 		B0CFB88E295EE1D9004AF205 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFB88D295EE1D9004AF205 /* CharacterCell.swift */; };
 		B0CFB892295EF152004AF205 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFB891295EF152004AF205 /* CharacterViewModel.swift */; };
 		B0CFB894295EF1C3004AF205 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFB893295EF1C3004AF205 /* CharacterModel.swift */; };
 		B0CFB896295EFC6D004AF205 /* CharacterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFB895295EFC6D004AF205 /* CharacterViewModelTests.swift */; };
+		B0F0B95A2961899600DEFC18 /* CharacterFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9592961899600DEFC18 /* CharacterFilterViewModel.swift */; };
+		B0F0B9622961BA6200DEFC18 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9612961BA6200DEFC18 /* FilterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +70,13 @@
 		B03F1BB4295EA17E008B77E8 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		B03F1BB7295EB466008B77E8 /* URLSessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionRequest.swift; sourceTree = "<group>"; };
 		B03F1BB9295EBE6C008B77E8 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		B0504A0529616EE200FC203E /* FilterViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewViewController.swift; sourceTree = "<group>"; };
 		B0CFB88D295EE1D9004AF205 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		B0CFB891295EF152004AF205 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		B0CFB893295EF1C3004AF205 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		B0CFB895295EFC6D004AF205 /* CharacterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModelTests.swift; sourceTree = "<group>"; };
+		B0F0B9592961899600DEFC18 /* CharacterFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterViewModel.swift; sourceTree = "<group>"; };
+		B0F0B9612961BA6200DEFC18 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,8 @@
 				B0162CE7295E8B4F00BE6C96 /* Main.storyboard */,
 				B0162CE5295E8B4F00BE6C96 /* ViewController.swift */,
 				B0CFB88D295EE1D9004AF205 /* CharacterCell.swift */,
+				B0504A0529616EE200FC203E /* FilterViewViewController.swift */,
+				B0F0B9612961BA6200DEFC18 /* FilterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -188,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				B0CFB891295EF152004AF205 /* CharacterViewModel.swift */,
+				B0F0B9592961899600DEFC18 /* CharacterFilterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -327,8 +336,11 @@
 				B0162CE2295E8B4F00BE6C96 /* AppDelegate.swift in Sources */,
 				B03F1BB8295EB466008B77E8 /* URLSessionRequest.swift in Sources */,
 				B03F1BBA295EBE6C008B77E8 /* Info.swift in Sources */,
+				B0F0B9622961BA6200DEFC18 /* FilterCell.swift in Sources */,
 				B0CFB894295EF1C3004AF205 /* CharacterModel.swift in Sources */,
 				B0162CE4295E8B4F00BE6C96 /* SceneDelegate.swift in Sources */,
+				B0F0B95A2961899600DEFC18 /* CharacterFilterViewModel.swift in Sources */,
+				B0504A0629616EE200FC203E /* FilterViewViewController.swift in Sources */,
 				B0CFB88E295EE1D9004AF205 /* CharacterCell.swift in Sources */,
 				B0CFB892295EF152004AF205 /* CharacterViewModel.swift in Sources */,
 				B03F1BB2295EA149008B77E8 /* Character.swift in Sources */,

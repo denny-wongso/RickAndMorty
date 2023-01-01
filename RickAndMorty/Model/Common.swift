@@ -8,13 +8,13 @@
 import Foundation
 
 
-public enum Status: String, Codable {
+public enum Status: String, Codable, CaseIterable {
     case Alive
     case Dead
     case unknown
 }
 
-public enum Species: String, Codable {
+public enum Species: String, Codable, CaseIterable {
     case Alien = "Alien"
     case Animal = "Animal"
     case Mythological = "Mythological Creature"
@@ -32,7 +32,7 @@ public enum Species: String, Codable {
     }
 }
 
-public enum Gender: String, Codable {
+public enum Gender: String, Codable, CaseIterable {
     case Male
     case Female
     case Genderless
