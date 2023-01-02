@@ -41,6 +41,7 @@
 		B0F0B97A2962B66D00DEFC18 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9792962B66D00DEFC18 /* LocationService.swift */; };
 		B0F0B97C2962B95A00DEFC18 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B97B2962B95A00DEFC18 /* LocationCell.swift */; };
 		B0F0B97E2962C16C00DEFC18 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B97D2962C16C00DEFC18 /* Extension.swift */; };
+		B0F0B9802962CE3300DEFC18 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B97F2962CE3200DEFC18 /* LocationDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		B0F0B9792962B66D00DEFC18 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		B0F0B97B2962B95A00DEFC18 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		B0F0B97D2962C16C00DEFC18 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		B0F0B97F2962CE3200DEFC18 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 			children = (
 				B0F0B96D2962B40300DEFC18 /* LocationViewController.swift */,
 				B0F0B97B2962B95A00DEFC18 /* LocationCell.swift */,
+				B0F0B97F2962CE3200DEFC18 /* LocationDetailViewController.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				B0F0B96E2962B40300DEFC18 /* LocationViewController.swift in Sources */,
 				B0F0B97A2962B66D00DEFC18 /* LocationService.swift in Sources */,
 				B0F0B9622961BA6200DEFC18 /* FilterCell.swift in Sources */,
+				B0F0B9802962CE3300DEFC18 /* LocationDetailViewController.swift in Sources */,
 				B0CFB894295EF1C3004AF205 /* CharacterModel.swift in Sources */,
 				B0162CE4295E8B4F00BE6C96 /* SceneDelegate.swift in Sources */,
 				B0F0B95A2961899600DEFC18 /* CharacterFilterViewModel.swift in Sources */,

@@ -81,10 +81,6 @@ class CharacterDetailsViewController: UIViewController, CharacterDetailProtocol 
 }
 
 extension CharacterDetailsViewController: UITableViewDataSource, UITableViewDelegate {
-//    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") as! TableCell
-//        return cell.labelName.frame.height
-//    }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cd?.episode.count ?? 0
     }
@@ -95,6 +91,4 @@ extension CharacterDetailsViewController: UITableViewDataSource, UITableViewDele
 
         return cell
     }
-    
-    
 }

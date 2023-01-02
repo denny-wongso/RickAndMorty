@@ -11,7 +11,7 @@ import UIKit
 class LocationViewController: UIViewController {
     
     var locationViewModel: LocationViewModelProtocol?
-    
+    var locationDetailVC: LocationDetailProtocol?
     @IBOutlet weak var textFieldSearch: UITextField!
     @IBOutlet weak var tableViewLocation: UITableView!
     var currentSearch: String = ""
@@ -43,8 +43,9 @@ class LocationViewController: UIViewController {
         filterData(name: "", startIndex: 0)
     }
     
-    func setup(locationViewModel: LocationViewModelProtocol) {
+    func setup(locationViewModel: LocationViewModelProtocol, locationDetailVC: LocationDetailProtocol) {
         self.locationViewModel = locationViewModel
+        self.locationDetailVC = locationDetailVC
         
     }
     
@@ -100,6 +101,20 @@ extension LocationViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == self.getSize() - 1 {
             self.filterData(name: textFieldSearch.text ?? "", startIndex: self.getSize())
             lastPullIndex = indexPath
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let id = locationViewModel?.data[indexPath.section].id else {
+            return
+        }
+        
+        guard let ld = locationViewModel?.getLocationDetail(id: id) else {
+            return
+        }
+        locationDetailVC?.setup(locationDetail: ld)
+        if let vc = locationDetailVC as? UIViewController {
+            present(vc, animated: true)
         }
     }
 }
