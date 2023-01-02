@@ -38,10 +38,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let cs = CharacterService(request: URLSessionRequest(), url: "/character")
         let cvm = CharacterViewModel(service: cs, maxRetrieve: 10)
         let mainView = storyboard.instantiateViewController(withIdentifier: "CharacterViewController") as! ViewController
-        mainView.setup(characterViewModel: cvm)
+    
+        let bottomSheetVC = filterViewController(delegate: mainView)
+        mainView.setup(characterViewModel: cvm, filterViewController: bottomSheetVC)
         
         nav.viewControllers = [mainView]
         return nav
+    }
+    
+    private func filterViewController(delegate: FilterViewDelegate) -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let bottomSheetVC = storyboard.instantiateViewController(withIdentifier: "FilterView") as! FilterViewViewController
+        let cfvp = CharacterFilterViewModel()
+        bottomSheetVC.setup(characterFilterViewModelProtocol: cfvp)
+        bottomSheetVC.delegate = delegate
+        return bottomSheetVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
