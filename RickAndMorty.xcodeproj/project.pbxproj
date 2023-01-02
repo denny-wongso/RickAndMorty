@@ -178,11 +178,9 @@
 		B03F1BB0295EA13B008B77E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B03F1BB1295EA149008B77E8 /* Character.swift */,
+				B0F0B9692962B2A500DEFC18 /* Character */,
 				B03F1BB4295EA17E008B77E8 /* Common.swift */,
 				B03F1BB9295EBE6C008B77E8 /* Info.swift */,
-				B0CFB893295EF1C3004AF205 /* CharacterModel.swift */,
-				B0F0B965296286BE00DEFC18 /* CharacterDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,12 +188,8 @@
 		B0CFB88F295EEE01004AF205 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B0F0B96A2962B2B800DEFC18 /* Character */,
 				B0162CE7295E8B4F00BE6C96 /* Main.storyboard */,
-				B0162CE5295E8B4F00BE6C96 /* ViewController.swift */,
-				B0CFB88D295EE1D9004AF205 /* CharacterCell.swift */,
-				B0504A0529616EE200FC203E /* FilterViewViewController.swift */,
-				B0F0B9612961BA6200DEFC18 /* FilterCell.swift */,
-				B0F0B96329627FCE00DEFC18 /* CharacterDetailsViewController.swift */,
 				B0F0B9672962A15500DEFC18 /* TableCell.swift */,
 			);
 			path = View;
@@ -204,10 +198,40 @@
 		B0CFB890295EEE0D004AF205 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				B0F0B96B2962B2CC00DEFC18 /* Character */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B0F0B9692962B2A500DEFC18 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				B03F1BB1295EA149008B77E8 /* Character.swift */,
+				B0CFB893295EF1C3004AF205 /* CharacterModel.swift */,
+				B0F0B965296286BE00DEFC18 /* CharacterDetail.swift */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		B0F0B96A2962B2B800DEFC18 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				B0162CE5295E8B4F00BE6C96 /* ViewController.swift */,
+				B0CFB88D295EE1D9004AF205 /* CharacterCell.swift */,
+				B0504A0529616EE200FC203E /* FilterViewViewController.swift */,
+				B0F0B9612961BA6200DEFC18 /* FilterCell.swift */,
+				B0F0B96329627FCE00DEFC18 /* CharacterDetailsViewController.swift */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		B0F0B96B2962B2CC00DEFC18 /* Character */ = {
+			isa = PBXGroup;
+			children = (
 				B0CFB891295EF152004AF205 /* CharacterViewModel.swift */,
 				B0F0B9592961899600DEFC18 /* CharacterFilterViewModel.swift */,
 			);
-			path = ViewModel;
+			path = Character;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
