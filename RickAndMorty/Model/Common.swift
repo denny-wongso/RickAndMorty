@@ -6,12 +6,24 @@
 //
 
 import Foundation
+import UIKit
 
 
 public enum Status: String, Codable, CaseIterable {
     case Alive
     case Dead
     case unknown
+    
+    func getIcon() -> UIImage? {
+        switch self {
+        case .Alive:
+            return UIImage(named: "alive")
+        case .Dead:
+            return UIImage(named: "dead")
+        case .unknown:
+            return UIImage(named: "unknown")
+        }
+    }
 }
 
 public enum Species: String, Codable, CaseIterable {
@@ -37,6 +49,18 @@ public enum Gender: String, Codable, CaseIterable {
     case Female
     case Genderless
     case unknown
+    func getIcon() -> UIImage? {
+        switch self {
+        case .Male:
+            return UIImage(named: "male")
+        case .Female:
+            return UIImage(named: "female")
+        case .Genderless:
+            return UIImage(named: "neutral")
+        case .unknown:
+            return UIImage(named: "unknown")
+        }
+    }
 }
 
 

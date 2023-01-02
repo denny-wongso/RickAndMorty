@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     
     var characterViewModel: CharacterViewModelProtocol?
     var filterViewController: UIViewController?
+    var detailViewController: CharacterDetailProtocol?
     
     @IBOutlet weak var collectionViewCharacters: UICollectionView!
     @IBOutlet weak var textFieldSearch: UITextField!
@@ -43,9 +44,10 @@ class ViewController: UIViewController {
         filterData(name: "", startIndex: 0)
     }
     
-    func setup(characterViewModel: CharacterViewModelProtocol, filterViewController: UIViewController) {
+    func setup(characterViewModel: CharacterViewModelProtocol, filterViewController: UIViewController, characterDetailViewController: CharacterDetailProtocol) {
         self.characterViewModel = characterViewModel
         self.filterViewController = filterViewController
+        self.detailViewController = characterDetailViewController
         let doneButton = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(filterButtonTapped))
         doneButton.image = UIImage(systemName: "slider.horizontal.3")
         self.navigationItem.rightBarButtonItem = doneButton
@@ -131,7 +133,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             DispatchQueue.main.async {
                 cell.setup(name: model.name, place: model.species)
             }
-            self.getImageData(path: model.image, data: {(data) in
+            self.getImageData(path: model.image, data: {[weak self](data) in
+                self?.characterViewModel?.data[indexPath.row].addImageData(imageData: data)
                 DispatchQueue.main.async {
                     cell.addImage(image: data)
                 }
@@ -139,8 +142,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             
         }
         return cell
-        
-        
     }
     
     
@@ -152,6 +153,22 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             // The last cell is about to be displayed, so load more data
             self.filterData(name: textFieldSearch.text ?? "", startIndex: self.getSize())
             lastPullIndex = indexPath
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let image = characterViewModel?.data[indexPath.row].imageData
+        
+        guard let id = characterViewModel?.data[indexPath.row].id else {
+            return
+        }
+        
+        guard let cd = characterViewModel?.getCharacterDetail(id: id, image: image) else {
+            return
+        }
+        detailViewController?.setup(characterDetail: cd)
+        if let vc = detailViewController as? UIViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
