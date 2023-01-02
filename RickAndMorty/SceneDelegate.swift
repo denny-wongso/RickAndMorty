@@ -23,8 +23,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //setup tab bar
         let tabBarViewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
         let firstView = characterViewController()
+        let secondView = locationViewController()
         
         tabBarViewController.addChild(firstView)
+        tabBarViewController.addChild(secondView)
+        firstView.tabBarItem.title = "Character"
+        var image1 = UIImage(named: "character")
+        image1 = image1?.scalePreservingAspectRatio(targetSize: CGSize(width: 25, height: 25))
+        firstView.tabBarItem.image = image1
+        secondView.tabBarItem.title = "Location"
+        var image2 = UIImage(named: "location")
+        image2 = image2?.scalePreservingAspectRatio(targetSize: CGSize(width: 25, height: 25))
+        secondView.tabBarItem.image = image2
 
         window?.rootViewController = tabBarViewController
         
@@ -61,6 +71,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let cdViewController = storyboard.instantiateViewController(withIdentifier: "CharacterDetails") as! CharacterDetailsViewController
         return cdViewController
+    }
+    
+    private func locationViewController() -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let ls = LocationService(request: URLSessionRequest(), url: "/location")
+        let lvm = LocationViewModel(service: ls, maxRetrieve: 10)
+        let mainView = storyboard.instantiateViewController(withIdentifier: "LocationViewController") as! LocationViewController
+        
+//        let characterDetailVC = detailViewController()
+        
+        mainView.setup(locationViewModel: lvm)
+        return mainView
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
