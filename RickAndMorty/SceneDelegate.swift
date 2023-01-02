@@ -24,17 +24,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarViewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
         let firstView = characterViewController()
         let secondView = locationViewController()
+        let thirdView = episodeViewController()
         
         tabBarViewController.addChild(firstView)
         tabBarViewController.addChild(secondView)
+        tabBarViewController.addChild(thirdView)
+        
         firstView.tabBarItem.title = "Character"
         var image1 = UIImage(named: "character")
         image1 = image1?.scalePreservingAspectRatio(targetSize: CGSize(width: 25, height: 25))
         firstView.tabBarItem.image = image1
+        
         secondView.tabBarItem.title = "Location"
         var image2 = UIImage(named: "location")
         image2 = image2?.scalePreservingAspectRatio(targetSize: CGSize(width: 25, height: 25))
         secondView.tabBarItem.image = image2
+        
+        thirdView.tabBarItem.title = "Episode"
+        var image3 = UIImage(named: "episode")
+        image3 = image3?.scalePreservingAspectRatio(targetSize: CGSize(width: 25, height: 25))
+        thirdView.tabBarItem.image = image3
 
         window?.rootViewController = tabBarViewController
         
@@ -90,6 +99,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let ldViewController = storyboard.instantiateViewController(withIdentifier: "LocationDetailViewController") as! LocationDetailViewController
         return ldViewController
+    }
+    
+    private func episodeViewController() -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let es = EpisodeService(request: URLSessionRequest(), url: "/episode")
+        let evm = EpisodeViewModel(service: es, maxRetrieve: 10)
+        let mainView = storyboard.instantiateViewController(withIdentifier: "EpisodeViewController") as! EpisodeViewController
+        
+        let episodeDetailVC = episodeDetailViewController()
+        
+        mainView.setup(episodeViewModel: evm, episodeDetailVC: episodeDetailVC)
+        return mainView
+    }
+    
+    private func episodeDetailViewController() -> EpisodeDetailProtocol {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let edViewController = storyboard.instantiateViewController(withIdentifier: "EpisodeDetailViewController") as! EpisodeDetailViewController
+        return edViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
