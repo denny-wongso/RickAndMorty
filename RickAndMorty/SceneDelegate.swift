@@ -80,10 +80,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let lvm = LocationViewModel(service: ls, maxRetrieve: 10)
         let mainView = storyboard.instantiateViewController(withIdentifier: "LocationViewController") as! LocationViewController
         
-//        let characterDetailVC = detailViewController()
+        let locationDetailVC = locationDetailViewController()
         
-        mainView.setup(locationViewModel: lvm)
+        mainView.setup(locationViewModel: lvm, locationDetailVC: locationDetailVC)
         return mainView
+    }
+    
+    private func locationDetailViewController() -> LocationDetailProtocol {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let ldViewController = storyboard.instantiateViewController(withIdentifier: "LocationDetailViewController") as! LocationDetailViewController
+        return ldViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
