@@ -14,7 +14,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionViewCharacters: UICollectionView!
     @IBOutlet weak var textFieldSearch: UITextField!
+    var currentSearch: String = ""
+    var timer: Timer? = nil {
+        willSet {
+            timer?.invalidate()
+        }
+    }
 
+    var lastPullIndex: IndexPath?
     
     private let sectionInsets = UIEdgeInsets(top: 20.0, left: 25.0, bottom: 20.0, right: 25.0)
     private let itemsPerRow = 2.0
@@ -82,7 +89,7 @@ class ViewController: UIViewController {
     
     private func filterData(name: String, startIndex: Int) {
         self.characterViewModel?.filter(name: name, success: {[weak self](success, message) in
-            if startIndex == 0 {
+            if startIndex == 0 || !success {
                 DispatchQueue.main.async {
                     self?.collectionViewCharacters.reloadData()
                 }
@@ -103,10 +110,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        let name = (currentText as NSString).replacingCharacters(in: range, with: string)
-        self.filterData(name: name, startIndex: 0)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
         return true
+    }
+    
+    @objc func fireTimer() {
+        self.filterData(name: textFieldSearch.text ?? "", startIndex: 0)
     }
 }
 
@@ -136,9 +145,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if lastPullIndex == indexPath {
+            return
+        }
         if indexPath.item == self.getSize() - 1 {
             // The last cell is about to be displayed, so load more data
-            self.filterData(name: "", startIndex: self.getSize())
+            self.filterData(name: textFieldSearch.text ?? "", startIndex: self.getSize())
+            lastPullIndex = indexPath
         }
     }
 }

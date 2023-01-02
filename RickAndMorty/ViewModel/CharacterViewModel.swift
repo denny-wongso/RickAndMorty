@@ -56,7 +56,7 @@ public class CharacterViewModel: CharacterViewModelProtocol {
         } else {
             if(maxRetrieve == 0) {
                 self.data = self.filterData(name: name)
-                success?(true, nil)
+                success?(false, nil)
             }
             while maxRetrieve > 0 {
                 getNextPaginationCharacters(success: {[weak self, name, success] (s, m) in
