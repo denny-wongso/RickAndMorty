@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         collectionViewCharacters.dataSource = self
         collectionViewCharacters.delegate = self
+        textFieldSearch.delegate = self
         
         let imageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
         let icon = UIImage(systemName: "magnifyingglass")
@@ -31,30 +32,11 @@ class ViewController: UIViewController {
         textFieldSearch.leftView = imageContainerView
         textFieldSearch.leftViewMode = .always
         textFieldSearch.tintColor = .lightGray
-        loadMoreData(initial: true)
+        filterData(name: "", startIndex: 0)
     }
     
     func setup(characterViewModel: CharacterViewModelProtocol) {
         self.characterViewModel = characterViewModel
-    }
-
-    
-    func loadMoreData(initial: Bool) {
-        // Make a request to your backend to fetch the additional data
-        let startIndex = self.getSize()
-        if initial {
-            self.characterViewModel?.getCharacters(success: { [startIndex, weak self] (success, message) in
-                if success {
-                    self?.appendCollectionView(startIndex: startIndex)
-                }
-            })
-        } else {
-            self.characterViewModel?.getNextPaginationCharacters(success: { [startIndex, weak self] (success, message) in
-                if success {
-                    self?.appendCollectionView(startIndex: startIndex)
-                }
-            })
-        }
     }
     
     private func appendCollectionView(startIndex: Int) {
@@ -80,8 +62,28 @@ class ViewController: UIViewController {
             }
         })
     }
+    
+    private func filterData(name: String, startIndex: Int) {
+        self.characterViewModel?.filter(name: name, success: {[weak self](success, message) in
+            if startIndex == 0 {
+                DispatchQueue.main.async {
+                    self?.collectionViewCharacters.reloadData()
+                }
+                return
+            }
+            self?.appendCollectionView(startIndex: startIndex)
+        })
+    }
 }
 
+extension ViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let name = (currentText as NSString).replacingCharacters(in: range, with: string)
+        self.filterData(name: name, startIndex: 0)
+        return true
+    }
+}
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -111,7 +113,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == self.getSize() - 1 {
             // The last cell is about to be displayed, so load more data
-            loadMoreData(initial: false)
+            self.filterData(name: "", startIndex: self.getSize())
         }
     }
 }
