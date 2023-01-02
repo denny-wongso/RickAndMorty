@@ -118,7 +118,7 @@
         <scene sceneID="ZNH-Ce-qDD">
             <objects>
                 <viewController storyboardIdentifier="FilterView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="I1I-Um-rQz" customClass="FilterViewViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="ViS-n3-KTT">
+                    <view key="view" contentMode="scaleToFill" id="ViS-n3-KTT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -319,7 +319,6 @@
                             <constraint firstItem="K1a-6q-8Le" firstAttribute="leading" secondItem="z5Z-w1-LTk" secondAttribute="leading" constant="32" id="ndP-yB-VGK"/>
                             <constraint firstItem="znh-ad-TjB" firstAttribute="top" secondItem="Kri-WQ-9U4" secondAttribute="bottom" constant="16" id="q93-Ow-9gE"/>
                             <constraint firstItem="z5Z-w1-LTk" firstAttribute="trailing" secondItem="JOf-zd-CyD" secondAttribute="trailing" constant="23" id="uWk-P0-V6v"/>
-                            <constraint firstAttribute="bottom" secondItem="K1a-6q-8Le" secondAttribute="bottom" constant="11" id="zGU-DQ-dOh"/>
                             <constraint firstItem="CZk-US-CsC" firstAttribute="leading" secondItem="z5Z-w1-LTk" secondAttribute="leading" constant="23" id="zWG-cf-ere"/>
                         </constraints>
                     </view>

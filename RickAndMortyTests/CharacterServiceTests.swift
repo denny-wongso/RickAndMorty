@@ -130,7 +130,6 @@ class CharacterServiceTests: XCTestCase {
 
 private class MockURLSessionRequestForImage: URLSessionRequestProtocol {
     func request(url: URL, handler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        print(url)
         if url.pathExtension == "jpg" {
             handler(Data(), nil, nil)
         } else {
