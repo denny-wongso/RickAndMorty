@@ -42,6 +42,14 @@
 		B0F0B97C2962B95A00DEFC18 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B97B2962B95A00DEFC18 /* LocationCell.swift */; };
 		B0F0B97E2962C16C00DEFC18 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B97D2962C16C00DEFC18 /* Extension.swift */; };
 		B0F0B9802962CE3300DEFC18 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B97F2962CE3200DEFC18 /* LocationDetailViewController.swift */; };
+		B0F0B9832962D88A00DEFC18 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9822962D88A00DEFC18 /* Episode.swift */; };
+		B0F0B9852962D8DC00DEFC18 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9842962D8DC00DEFC18 /* EpisodeModel.swift */; };
+		B0F0B9872962D96200DEFC18 /* EpisodeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9862962D96200DEFC18 /* EpisodeDetail.swift */; };
+		B0F0B98A2962DC1500DEFC18 /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9892962DC1500DEFC18 /* EpisodeViewController.swift */; };
+		B0F0B98C2962DDB000DEFC18 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B98B2962DDB000DEFC18 /* EpisodeCell.swift */; };
+		B0F0B98F2962DEAE00DEFC18 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B98E2962DEAE00DEFC18 /* EpisodeViewModel.swift */; };
+		B0F0B991296354C400DEFC18 /* EpisodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B990296354C400DEFC18 /* EpisodeService.swift */; };
+		B0F0B9932963574300DEFC18 /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F0B9922963574300DEFC18 /* EpisodeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +109,14 @@
 		B0F0B97B2962B95A00DEFC18 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		B0F0B97D2962C16C00DEFC18 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B0F0B97F2962CE3200DEFC18 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
+		B0F0B9822962D88A00DEFC18 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		B0F0B9842962D8DC00DEFC18 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
+		B0F0B9862962D96200DEFC18 /* EpisodeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetail.swift; sourceTree = "<group>"; };
+		B0F0B9892962DC1500DEFC18 /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
+		B0F0B98B2962DDB000DEFC18 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
+		B0F0B98E2962DEAE00DEFC18 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
+		B0F0B990296354C400DEFC18 /* EpisodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeService.swift; sourceTree = "<group>"; };
+		B0F0B9922963574300DEFC18 /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +207,7 @@
 				B03F1BAE295EA030008B77E8 /* BaseService.swift */,
 				B03F1BB7295EB466008B77E8 /* URLSessionRequest.swift */,
 				B0F0B9792962B66D00DEFC18 /* LocationService.swift */,
+				B0F0B990296354C400DEFC18 /* EpisodeService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -198,6 +215,7 @@
 		B03F1BB0295EA13B008B77E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B0F0B9812962D87D00DEFC18 /* Episode */,
 				B0F0B9722962B53D00DEFC18 /* Location */,
 				B0F0B9692962B2A500DEFC18 /* Character */,
 				B03F1BB4295EA17E008B77E8 /* Common.swift */,
@@ -209,6 +227,7 @@
 		B0CFB88F295EEE01004AF205 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B0F0B9882962DC0700DEFC18 /* Episode */,
 				B0F0B96C2962B3F400DEFC18 /* Location */,
 				B0F0B96A2962B2B800DEFC18 /* Character */,
 				B0162CE7295E8B4F00BE6C96 /* Main.storyboard */,
@@ -220,6 +239,7 @@
 		B0CFB890295EEE0D004AF205 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				B0F0B98D2962DE9B00DEFC18 /* Episode */,
 				B0F0B96F2962B47200DEFC18 /* Location */,
 				B0F0B96B2962B2CC00DEFC18 /* Character */,
 			);
@@ -283,6 +303,34 @@
 				B0F0B9772962B61800DEFC18 /* LocationDetail.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		B0F0B9812962D87D00DEFC18 /* Episode */ = {
+			isa = PBXGroup;
+			children = (
+				B0F0B9822962D88A00DEFC18 /* Episode.swift */,
+				B0F0B9842962D8DC00DEFC18 /* EpisodeModel.swift */,
+				B0F0B9862962D96200DEFC18 /* EpisodeDetail.swift */,
+			);
+			path = Episode;
+			sourceTree = "<group>";
+		};
+		B0F0B9882962DC0700DEFC18 /* Episode */ = {
+			isa = PBXGroup;
+			children = (
+				B0F0B9892962DC1500DEFC18 /* EpisodeViewController.swift */,
+				B0F0B98B2962DDB000DEFC18 /* EpisodeCell.swift */,
+				B0F0B9922963574300DEFC18 /* EpisodeDetailViewController.swift */,
+			);
+			path = Episode;
+			sourceTree = "<group>";
+		};
+		B0F0B98D2962DE9B00DEFC18 /* Episode */ = {
+			isa = PBXGroup;
+			children = (
+				B0F0B98E2962DEAE00DEFC18 /* EpisodeViewModel.swift */,
+			);
+			path = Episode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,24 +469,32 @@
 				B0162CE6295E8B4F00BE6C96 /* ViewController.swift in Sources */,
 				B0F0B966296286BE00DEFC18 /* CharacterDetail.swift in Sources */,
 				B0F0B9712962B48600DEFC18 /* LocationViewModel.swift in Sources */,
+				B0F0B98A2962DC1500DEFC18 /* EpisodeViewController.swift in Sources */,
 				B0F0B96429627FCE00DEFC18 /* CharacterDetailsViewController.swift in Sources */,
 				B0162CE2295E8B4F00BE6C96 /* AppDelegate.swift in Sources */,
 				B03F1BB8295EB466008B77E8 /* URLSessionRequest.swift in Sources */,
 				B03F1BBA295EBE6C008B77E8 /* Info.swift in Sources */,
 				B0F0B97E2962C16C00DEFC18 /* Extension.swift in Sources */,
 				B0F0B96E2962B40300DEFC18 /* LocationViewController.swift in Sources */,
+				B0F0B9852962D8DC00DEFC18 /* EpisodeModel.swift in Sources */,
 				B0F0B97A2962B66D00DEFC18 /* LocationService.swift in Sources */,
 				B0F0B9622961BA6200DEFC18 /* FilterCell.swift in Sources */,
+				B0F0B991296354C400DEFC18 /* EpisodeService.swift in Sources */,
 				B0F0B9802962CE3300DEFC18 /* LocationDetailViewController.swift in Sources */,
 				B0CFB894295EF1C3004AF205 /* CharacterModel.swift in Sources */,
 				B0162CE4295E8B4F00BE6C96 /* SceneDelegate.swift in Sources */,
 				B0F0B95A2961899600DEFC18 /* CharacterFilterViewModel.swift in Sources */,
+				B0F0B9832962D88A00DEFC18 /* Episode.swift in Sources */,
+				B0F0B9872962D96200DEFC18 /* EpisodeDetail.swift in Sources */,
+				B0F0B98C2962DDB000DEFC18 /* EpisodeCell.swift in Sources */,
 				B0F0B9742962B54900DEFC18 /* Location.swift in Sources */,
 				B0504A0629616EE200FC203E /* FilterViewViewController.swift in Sources */,
 				B0CFB88E295EE1D9004AF205 /* CharacterCell.swift in Sources */,
+				B0F0B98F2962DEAE00DEFC18 /* EpisodeViewModel.swift in Sources */,
 				B0F0B9762962B5DC00DEFC18 /* LocationModel.swift in Sources */,
 				B0CFB892295EF152004AF205 /* CharacterViewModel.swift in Sources */,
 				B03F1BB2295EA149008B77E8 /* Character.swift in Sources */,
+				B0F0B9932963574300DEFC18 /* EpisodeDetailViewController.swift in Sources */,
 				B0F0B97C2962B95A00DEFC18 /* LocationCell.swift in Sources */,
 				B03F1BAF295EA030008B77E8 /* BaseService.swift in Sources */,
 				B03F1BAB295E91FE008B77E8 /* CharacterService.swift in Sources */,
