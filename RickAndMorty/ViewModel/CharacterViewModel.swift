@@ -12,6 +12,7 @@ protocol CharacterViewModelProtocol {
     func getImage(path: String, data: ((Data?) ->Void)?)
     func filter(name: String, success: ((Bool, String?) ->Void)?)
     func filter(status: String, species: String, gender: String, success: ((Bool, String?) ->Void)?)
+    func getCharacterDetail(id: Int, image: Data?) -> CharacterDetail?
 }
 
 public class CharacterViewModel: CharacterViewModelProtocol {
@@ -68,7 +69,7 @@ public class CharacterViewModel: CharacterViewModelProtocol {
     }
     
     private func map(c: Character) -> CharacterModel {
-        return CharacterModel(image: c.image, name: c.name, species: c.species.rawValue)
+        return CharacterModel(id: c.id, image: c.image, name: c.name, species: c.species.rawValue)
     }
     
     private func filterData(name: String) -> [CharacterModel] {
@@ -94,6 +95,13 @@ public class CharacterViewModel: CharacterViewModelProtocol {
                 success?(s, m)
             })
         }
+    }
+    
+    func getCharacterDetail(id: Int, image: Data?) -> CharacterDetail? {
+        guard let c = allData.filter({$0.id == id}).first else {
+            return nil
+        }
+        return CharacterDetail(id: c.id, image: image, name: c.name, status: c.status, gender: c.gender, species: c.species, created: c.created, origin: c.origin, location: c.location, episode: c.episode)
     }
     
     private func filterData(status: String, species: String, gender: String) -> [CharacterModel] {

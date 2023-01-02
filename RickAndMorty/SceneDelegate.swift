@@ -40,8 +40,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainView = storyboard.instantiateViewController(withIdentifier: "CharacterViewController") as! ViewController
     
         let bottomSheetVC = filterViewController(delegate: mainView)
-        mainView.setup(characterViewModel: cvm, filterViewController: bottomSheetVC)
         
+        let characterDetailVC = detailViewController()
+        
+        mainView.setup(characterViewModel: cvm, filterViewController: bottomSheetVC, characterDetailViewController: characterDetailVC)
         nav.viewControllers = [mainView]
         return nav
     }
@@ -53,6 +55,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         bottomSheetVC.setup(characterFilterViewModelProtocol: cfvp)
         bottomSheetVC.delegate = delegate
         return bottomSheetVC
+    }
+    
+    private func detailViewController() -> CharacterDetailProtocol {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let cdViewController = storyboard.instantiateViewController(withIdentifier: "CharacterDetails") as! CharacterDetailsViewController
+        return cdViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
