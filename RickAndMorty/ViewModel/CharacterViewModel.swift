@@ -11,11 +11,12 @@ protocol CharacterViewModelProtocol {
     var data: [CharacterModel] {get set}
     func getImage(path: String, data: ((Data?) ->Void)?)
     func filter(name: String, success: ((Bool, String?) ->Void)?)
+    func filter(status: String, species: String, gender: String, success: ((Bool, String?) ->Void)?)
 }
 
 public class CharacterViewModel: CharacterViewModelProtocol {
     var data: [CharacterModel] = []
-    private var allData: [CharacterModel] = []
+    private var allData: [Character] = []
     private var nextURL: String? = nil
     private var maxRetrieve: Int
 
@@ -35,27 +36,81 @@ public class CharacterViewModel: CharacterViewModelProtocol {
         if name == "" {
             if allData.count == 0 {
                 getCharacters(success: {[weak self, success] (s, m) in
-                    self?.data = self?.allData ?? []
+                    guard let self = self else {
+                        success?(s, m)
+                        return
+                    }
+                    self.data = self.allData.map({self.map(c: $0)})
                     success?(s, m)
                 })
             } else {
                 getNextPaginationCharacters(success: {[weak self, success] (s, m) in
-                    self?.data = self?.allData ?? []
+                    guard let self = self else {
+                        success?(s, m)
+                        return
+                    }
+                    self.data = self.allData.map({self.map(c: $0)})
                     success?(s, m)
                 })
             }
         } else {
             if(maxRetrieve == 0) {
-                self.data = self.allData.filter({$0.name.lowercased().contains(name.lowercased())})
+                self.data = self.filterData(name: name)
                 success?(true, nil)
             }
             while maxRetrieve > 0 {
                 getNextPaginationCharacters(success: {[weak self, name, success] (s, m) in
-                    self?.data = self?.allData.filter({$0.name.lowercased().contains(name.lowercased())}) ?? []
+                    self?.data = self?.filterData(name: name) ?? []
                     success?(s, m)
                 })
             }
         }
+    }
+    
+    private func map(c: Character) -> CharacterModel {
+        return CharacterModel(image: c.image, name: c.name, species: c.species.rawValue)
+    }
+    
+    private func filterData(name: String) -> [CharacterModel] {
+        var data: [CharacterModel] = []
+        data = self.allData.filter({$0.name.lowercased().contains(name.lowercased())}).map({map(c: $0)})
+        return data
+    }
+    
+    func filter(status: String, species: String, gender: String, success: ((Bool, String?) ->Void)?) {
+        if status == "" && species == "" && gender == "" {
+            self.data = allData.map({map(c: $0)})
+            success?(true, nil)
+            return
+        }
+        self.data = []
+        if(maxRetrieve == 0) {
+            self.data = filterData(status: status, species: species, gender: gender)
+            success?(true, nil)
+        }
+        while maxRetrieve > 0 {
+            getNextPaginationCharacters(success: {[weak self, status, species, gender, success] (s, m) in
+                self?.data = self?.filterData(status: status, species: species, gender: gender) ?? []
+                success?(s, m)
+            })
+        }
+    }
+    
+    private func filterData(status: String, species: String, gender: String) -> [CharacterModel] {
+        var data: [CharacterModel] = []
+        for each in self.allData {
+            if status != "" && each.status.rawValue.lowercased().contains(status.lowercased()) == false {
+                continue
+            }
+            if species != "" && each.species.rawValue.lowercased().contains(species.lowercased()) == false {
+                continue
+            }
+            if gender != "" && each.gender.rawValue.lowercased().contains(gender.lowercased()) == false {
+                continue
+            }
+            data.append(map(c: each))
+        }
+        return data
     }
 
     private func getCharacters(success: ((Bool, String?) ->Void)?) {
@@ -65,7 +120,7 @@ public class CharacterViewModel: CharacterViewModelProtocol {
                 return
             }
             self?.nextURL = characterResponse?.info.next
-            self?.allData.append(contentsOf: characters.map{ CharacterModel(image: $0.image, name: $0.name, species: $0.species.rawValue) })
+            self?.allData.append(contentsOf: characters)
             success?(true, nil)
         }, fail: {(httperror) in
             success?(false, httperror.localizedDescription)
@@ -88,7 +143,7 @@ public class CharacterViewModel: CharacterViewModelProtocol {
                 return
             }
             self?.nextURL = characterResponse?.info.next
-            self?.allData.append(contentsOf: characters.map{ CharacterModel(image: $0.image, name: $0.name, species: $0.species.rawValue) })
+            self?.allData.append(contentsOf: characters)
             success?(true, nil)
         }, fail: {(httperror) in
             success?(false, httperror.localizedDescription)

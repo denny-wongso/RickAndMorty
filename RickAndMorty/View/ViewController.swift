@@ -91,6 +91,14 @@ class ViewController: UIViewController {
             self?.appendCollectionView(startIndex: startIndex)
         })
     }
+    
+    private func filterData(status: String, species: String, gender: String) {
+        self.characterViewModel?.filter(status: status, species: species, gender: gender, success: {[weak self](success, message) in
+                DispatchQueue.main.async {
+                    self?.collectionViewCharacters.reloadData()
+                }
+        })
+    }
 }
 
 extension ViewController: UITextFieldDelegate {
@@ -157,6 +165,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 extension ViewController: FilterViewDelegate {
     func filterSelected(status: String, species: String, gender: String) {
-
+        self.filterData(status: status, species: species, gender: gender)
     }
 }
