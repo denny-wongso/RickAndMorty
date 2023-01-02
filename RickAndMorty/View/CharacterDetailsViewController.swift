@@ -49,6 +49,7 @@ class CharacterDetailsViewController: UIViewController, CharacterDetailProtocol 
         guard let cd = cd else {
             return
         }
+        self.title = cd.name
         labelName.text = cd.name
         labelName.font = UIFont.systemFont(ofSize: 24)
         
